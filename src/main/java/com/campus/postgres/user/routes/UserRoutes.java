@@ -6,5 +6,6 @@ public class UserRoutes {
     public final static String BY_ID = ROOT + "/{id}";
     public final static String SEARCH = ROOT;
     public final static String EDIT = BY_ID;
+    public final static String DELETE = BY_ID;
 
 }
