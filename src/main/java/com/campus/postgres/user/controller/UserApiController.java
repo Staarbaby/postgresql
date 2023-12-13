@@ -8,13 +8,11 @@ import com.campus.postgres.user.exception.UserNotFoundException;
 import com.campus.postgres.user.repository.UserRepository;
 import com.campus.postgres.user.routes.UserRoutes;
 import lombok.AllArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +24,7 @@ public class UserApiController {
     private final UserRepository userRepository;
 
     @GetMapping("/")
-    public UserEntity test(){
+    public UserEntity root(){
         UserEntity user = UserEntity.builder()
                 .firstName("Test")
                 .lastName("Test")
@@ -34,6 +32,11 @@ public class UserApiController {
 
         user = userRepository.save(user);
         return user;
+    }
+
+    @GetMapping(UserRoutes.TEST)
+    public String test(){
+        return HttpStatus.OK.name();
     }
     @PostMapping(UserRoutes.CREATE)
     public UserResponse create (@RequestBody CreateUserRequest request){
