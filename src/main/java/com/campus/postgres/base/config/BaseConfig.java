@@ -4,7 +4,6 @@ import com.campus.postgres.base.routes.BaseRoutes;
 import com.campus.postgres.user.service.UserAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,7 +29,7 @@ public class BaseConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( auth ->auth
                         .requestMatchers(BaseRoutes.NOT_SECURED + "/**").anonymous()
-                        .requestMatchers(BaseRoutes.API + "/api/v1").authenticated())
+                        .requestMatchers(BaseRoutes.API + "/**").authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(AbstractHttpConfigurer::disable)
                 .userDetailsService(userAuthService)
